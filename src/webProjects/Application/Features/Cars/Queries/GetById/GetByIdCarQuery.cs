@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Application.Features.Cars.Dtos;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Cars.Queries.GetById
 {
-    internal class GetByIdCarQuery
+    public partial class GetByIdCarQuery : IRequest<GetByIdCarResponse>
     {
+        public Guid Id { get; set; }
     }
 }

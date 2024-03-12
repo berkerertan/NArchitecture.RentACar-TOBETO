@@ -1,12 +1,20 @@
-﻿using System;
+﻿using Application.Features.Brands.Dtos;
+using Application.Features.Cars.Dtos;
+using MediatR;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Cars.Commands.Update
+namespace Application.Features.Cars.Commands.Update;
+
+public class UpdateCarCommand : IRequest<UpdatedCarResponse>
 {
-    internal class UpdateCarCommand
-    {
-    }
+    public Guid Id { get; set; }
+    public Guid ModelId { get; set; }
+    public int ModelYear { get; set; }
+    public string Plate { get; set; }
+    public int State { get; set; } 
+    public double DailyPrice { get; set; }
 }

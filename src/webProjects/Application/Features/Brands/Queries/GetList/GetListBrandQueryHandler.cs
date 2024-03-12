@@ -1,4 +1,5 @@
-﻿using Application.Services.Repositories;
+﻿using Application.Features.Brands.Dtos;
+using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
@@ -10,18 +11,10 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Brands.Queries.GetList
 {
-    public class GetListBrandQuery : IRequest<GetListResponse<GetListBrandListItemDto>>, ICachableRequest
+    public class GetListBrandQuery : IRequest<List<GetByIdBrandResponse>>
     {
-        public PageRequest PageRequest { get; set; }
 
-        public bool BypassCache { get; }
-
-        public string CacheKey => $"GetListBrands({PageRequest.Page},{PageRequest.PageSize})";
-        public string CacheGroupKey => "GetBrands";
-
-        public TimeSpan? SlidingExpiration { get; }
-
-        public class GetListBrandQueryHandler : IRequestHandler<GetListBrandQuery, GetListResponse<GetListBrandListItemDto>>
+        public class GetListBrandQueryHandler : IRequestHandler<GetListBrandQuery, List<GetByIdBrandResponse>>
         {
             private readonly IBrandRepository _brandRepository;
             private readonly IMapper _mapper;
@@ -32,13 +25,10 @@ namespace Application.Features.Brands.Queries.GetList
                 _mapper = mapper;
             }
 
-            public async Task<GetListResponse<GetListBrandListItemDto>> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
+            public async Task<List<GetByIdBrandResponse>> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
             {
-                IPaginate<Brand> brands = await _brandRepository.GetListAsync(
-                    index: request.PageRequest.Page,
-                    size: request.PageRequest.PageSize
-                );
-                var mappedBrandListModel = _mapper.Map<GetListResponse<GetListBrandListItemDto>>(brands);
+                List<Brand> brands = await _brandRepository.GetAllAsync();
+                var mappedBrandListModel = _mapper.Map<List<GetByIdBrandResponse>>(brands);
                 return mappedBrandListModel;
             }
         }

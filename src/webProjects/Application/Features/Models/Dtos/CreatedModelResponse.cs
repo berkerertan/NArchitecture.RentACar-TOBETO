@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Models.Dtos
 {
-    internal class CreatedModelResponse
+    public class CreatedModelResponse
     {
+        public Guid BrandId { get; set; } //1
+        public string Name { get; set; } //"A6"
+
     }
 }

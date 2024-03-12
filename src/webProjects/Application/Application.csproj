@@ -18,7 +18,6 @@
     <Folder Include="Features\Brands\Rules\" />
     <Folder Include="Features\Cars\Rules\" />
     <Folder Include="Features\Models\Rules\" />
-    <Folder Include="Features\Models\Queries\" />
   </ItemGroup>
 
   <ItemGroup>

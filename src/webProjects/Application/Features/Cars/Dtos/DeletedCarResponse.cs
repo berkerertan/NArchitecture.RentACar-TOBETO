@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Cars.Dtos
 {
-    internal class DeletedCarResponse
+    public class DeletedCarResponse
     {
+        public Guid Id { get; set; }
     }
 }

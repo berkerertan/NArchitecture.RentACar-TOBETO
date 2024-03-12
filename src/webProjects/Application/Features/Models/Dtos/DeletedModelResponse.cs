@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Models.Dtos
 {
-    internal class DeletedModelResponse
+    public class DeletedModelResponse
     {
+        public Guid Id { get; set; }
     }
 }
