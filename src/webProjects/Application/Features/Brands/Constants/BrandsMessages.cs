@@ -10,5 +10,6 @@ namespace Application.Features.Brands.Constants
     {
         public const string BrandNotExists = "Brand not exists.";
         public const string BrandNameExists = "Brand name exists.";
+        public const string NameNotBlank = "Name not Blank";
     }
 }

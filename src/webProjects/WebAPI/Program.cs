@@ -24,6 +24,7 @@ namespace WebAPI
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                //app.ConfigureCustomExceptionMiddleware();
             }
 
             app.UseAuthorization();

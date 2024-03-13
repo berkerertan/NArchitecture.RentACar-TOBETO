@@ -25,6 +25,7 @@ namespace Application.Features.Cars.Profiles
             CreateMap<Car, DeleteCarCommand>().ReverseMap();
             CreateMap<Car, DeletedCarResponse>().ReverseMap();
             CreateMap<Car, UpdateCarCommand>().ReverseMap();
+            CreateMap<Car,GetByIdCarResponse>().ReverseMap();
             CreateMap<Car, UpdatedCarResponse>().ReverseMap();
         }
     }

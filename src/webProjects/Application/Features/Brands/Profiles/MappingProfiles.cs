@@ -17,6 +17,8 @@ namespace Application.Features.Brands.Profiles
             CreateMap<Brand,DeletedBrandResponse>().ReverseMap();
             CreateMap<Brand,UpdateBrandCommand>().ReverseMap();
             CreateMap<Brand,UpdatedBrandResponse>().ReverseMap();
+            CreateMap<Brand,GetByIdBrandResponse>().ReverseMap();
+
         }
     }
 }

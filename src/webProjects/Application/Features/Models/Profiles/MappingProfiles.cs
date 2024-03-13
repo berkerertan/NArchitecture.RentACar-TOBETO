@@ -25,6 +25,7 @@ namespace Application.Features.Models.Profiles
             CreateMap<Model, DeleteModelCommand>().ReverseMap();
             CreateMap<Model, DeletedModelResponse>().ReverseMap();
             CreateMap<Model, UpdateModelCommand>().ReverseMap();
+            CreateMap<Model,GetByIdModelResponse>().ReverseMap();
             CreateMap<Model, UpdatedModelResponse>().ReverseMap();
         }
     }
