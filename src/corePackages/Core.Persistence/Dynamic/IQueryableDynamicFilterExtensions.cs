@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Text;
+using System.Linq.Dynamic.Core;
 
 namespace Core.Persistence.Dynamic;
 
