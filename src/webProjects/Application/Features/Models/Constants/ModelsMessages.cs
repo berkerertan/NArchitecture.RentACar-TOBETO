@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Application.Features.Models.Constants
 {
-    internal class ModelsMessages
+    public static class ModelsMessages
     {
+        public const string ModelNotExists = "Model not exists.";
+        public const string ModelNameExists = "Model name exists.";
+        public const string NameNotBlank = "Name not Blank";
     }
 }
