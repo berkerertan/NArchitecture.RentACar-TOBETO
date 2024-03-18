@@ -46,6 +46,7 @@ namespace WebAPI.Controllers
         {
             return Created("", await Mediator.Send(query));
         }
+
         [HttpGet("pagination")]
         public async Task<IActionResult> GetListPagination([FromQuery] PageRequest pageRequest)
         {

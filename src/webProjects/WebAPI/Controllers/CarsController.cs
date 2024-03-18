@@ -1,8 +1,16 @@
-﻿using Application.Features.Cars.Commands.Create;
+﻿using Application.Features.Brands.Models;
+using Application.Features.Brands.Queries.GetListDynamic;
+using Application.Features.Brands.Queries.GetListPagination;
+using Application.Features.Cars.Commands.Create;
 using Application.Features.Cars.Commands.Delete;
 using Application.Features.Cars.Commands.Update;
+using Application.Features.Cars.Models;
 using Application.Features.Cars.Queries.GetById;
 using Application.Features.Cars.Queries.GetList;
+using Application.Features.Cars.Queries.GetListDynamic;
+using Application.Features.Cars.Queries.GetListPagimation;
+using Core.Application.Requests;
+using Core.Persistence.Dynamic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -40,6 +48,22 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> GetById([FromQuery] GetByIdCarQuery query)
         {
             return Created("", await Mediator.Send(query));
+        }
+
+        [HttpGet("pagination")]
+        public async Task<IActionResult> GetListPagination([FromQuery] PageRequest pageRequest)
+        {
+            GetListPaginationCarQuery query = new() { PageRequest = pageRequest };
+            CarListModel result = await Mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpPost("dynamic")]
+        public async Task<IActionResult> GetListDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
+        {
+            GetListCarDynamicQuery carDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
+            CarListModel result = await Mediator.Send(carDynamicQuery);
+            return Ok(result);
         }
     }
 }
