@@ -11,5 +11,10 @@ namespace Application.Features.Brands.Queries.GetById
     public partial class GetByIdBrandQuery : IRequest<GetByIdBrandResponse>
     {
         public Guid Id { get; set; }
+        public bool BypassCache { get; }
+
+        public string CacheKey => "brand-list";
+
+        public TimeSpan? SlidingExpiration { get; }
     }
 }

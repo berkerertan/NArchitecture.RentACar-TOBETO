@@ -12,5 +12,7 @@ namespace Application.Features.Brands.Commands.Update
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public bool BypassCache { get; }
+        public string CacheKey => "brand-list";
     }
 }

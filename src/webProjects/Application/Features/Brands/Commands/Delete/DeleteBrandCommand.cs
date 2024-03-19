@@ -11,5 +11,7 @@ namespace Application.Features.Brands.Commands.Delete
     public class DeleteBrandCommand : IRequest<DeletedBrandResponse>
     {
         public Guid Id { get; set; }
+        public bool BypassCache { get;}
+        public string CacheKey => "brand-list";
     }
 }

@@ -13,24 +13,32 @@ namespace Application.Features.Brands.Queries.GetList
 {
     public class GetListBrandQuery : IRequest<List<GetByIdBrandResponse>>
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
 
-        public class GetListBrandQueryHandler : IRequestHandler<GetListBrandQuery, List<GetByIdBrandResponse>>
+        public bool BypassCache { get; }
+
+        public string CacheKey => "brand-list";
+
+        public TimeSpan? SlidingExpiration { get; }
+
+    }
+    public class GetListBrandQueryHandler : IRequestHandler<GetListBrandQuery, List<GetByIdBrandResponse>>
+    {
+        private readonly IBrandRepository _brandRepository;
+        private readonly IMapper _mapper;
+
+        public GetListBrandQueryHandler(IBrandRepository brandRepository, IMapper mapper)
         {
-            private readonly IBrandRepository _brandRepository;
-            private readonly IMapper _mapper;
+            _brandRepository = brandRepository;
+            _mapper = mapper;
+        }
 
-            public GetListBrandQueryHandler(IBrandRepository brandRepository, IMapper mapper)
-            {
-                _brandRepository = brandRepository;
-                _mapper = mapper;
-            }
-
-            public async Task<List<GetByIdBrandResponse>> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
-            {
-                List<Brand> brands = await _brandRepository.GetAllAsync();
-                var mappedBrandListModel = _mapper.Map<List<GetByIdBrandResponse>>(brands);
-                return mappedBrandListModel;
-            }
+        public async Task<List<GetByIdBrandResponse>> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
+        {
+            List<Brand> brands = await _brandRepository.GetAllAsync();
+            var mappedBrandListModel = _mapper.Map<List<GetByIdBrandResponse>>(brands);
+            return mappedBrandListModel;
         }
     }
 }
