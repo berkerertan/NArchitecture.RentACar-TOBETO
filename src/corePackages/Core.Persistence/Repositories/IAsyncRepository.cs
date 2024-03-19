@@ -15,21 +15,22 @@ public interface IAsyncRepository<TEntity, TEntityId> : IQuery<TEntity>
     Task<IPaginate<TEntity>> GetListPaginateAsync(Expression<Func<TEntity, bool>>? predicate = null,
                                             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderby = null,
                                             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
-                                            int index = 0, int size = 10, bool enableTracking = true, CancellationToken cancellationToken = default);
+                                            int index = 0, int size = 10, bool enableTracking = true, CancellationToken cancellationToken = default, bool withDeleted = false);
 
     Task<IPaginate<TEntity>> GetListByDynamicAsync(Dynamic.Dynamic dynamic,
         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
-        int index = 0, int size = 10, bool enableTracking = true, CancellationToken cancellationToken = default);
+        int index = 0, int size = 10, bool enableTracking = true, CancellationToken cancellationToken = default,bool withDelted = false);
 
     Task<List<TEntity>> GetAllAsync
         (Expression<Func<TEntity, bool>> predicate = null,
-         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null);
+         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, bool withDeleted = false);
 
     Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate,
-               Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null);
+               Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, bool withDeleted = false);
 
     Task<TEntity> AddAsync(TEntity entity);
+    //Task<List<TEntity>> AddRangeAsync(IList<TEntity> entities);
     Task<TEntity> UpdateAsync(TEntity entity);
-    Task<TEntity> DeleteAsync(TEntity entity);
+    Task<TEntity> DeleteAsync(TEntity entity, bool permanent = false);
 
 }
