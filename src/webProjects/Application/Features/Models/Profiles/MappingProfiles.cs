@@ -1,18 +1,11 @@
-﻿using Application.Features.Brands.Commands.Create;
-using Application.Features.Brands.Commands.Delete;
-using Application.Features.Brands.Commands.Update;
-using Application.Features.Brands.Dtos;
-using Application.Features.Models.Commands.Create;
+﻿using Application.Features.Models.Commands.Create;
 using Application.Features.Models.Commands.Delete;
 using Application.Features.Models.Commands.Update;
 using Application.Features.Models.Dtos;
+using Application.Features.Models.Models;
 using AutoMapper;
+using Core.Persistence.Paging;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Models.Profiles
 {
@@ -27,6 +20,9 @@ namespace Application.Features.Models.Profiles
             CreateMap<Model, UpdateModelCommand>().ReverseMap();
             CreateMap<Model,GetByIdModelResponse>().ReverseMap();
             CreateMap<Model, UpdatedModelResponse>().ReverseMap();
+            CreateMap<Model, GetListModelResponse>().ReverseMap();
+            CreateMap<IPaginate<Model>, ModelListModel>().ReverseMap();
+
         }
     }
 }

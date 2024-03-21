@@ -15,8 +15,7 @@ public class CacheRemovingBehavior<TRequest, TResponse> : IPipelineBehavior<TReq
     private readonly IDistributedCache _cache;
     private readonly ILogger<CacheRemovingBehavior<TRequest, TResponse>> _logger;
 
-    public CacheRemovingBehavior(IDistributedCache cache, ILogger<CacheRemovingBehavior<TRequest, TResponse>> logger
-    )
+    public CacheRemovingBehavior(IDistributedCache cache, ILogger<CacheRemovingBehavior<TRequest, TResponse>> logger)
     {
         _cache = cache;
         _logger = logger;

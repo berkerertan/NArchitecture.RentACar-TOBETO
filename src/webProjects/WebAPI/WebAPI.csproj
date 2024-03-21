@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Persistance\Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+  </ItemGroup>
+
 </Project>

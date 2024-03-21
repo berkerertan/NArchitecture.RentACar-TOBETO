@@ -1,4 +1,5 @@
-﻿using Core.Application.Pipelines.Caching;
+﻿using Application.Services.CarImageService;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Performance;
 using Core.Application.Pipelines.Validation;
@@ -25,6 +26,8 @@ namespace Application
 
             services.AddSingleton<LoggerServiceBase, MongoDbLogger>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            //services.AddScoped<ICarImageService, CarImageManager>;
 
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
