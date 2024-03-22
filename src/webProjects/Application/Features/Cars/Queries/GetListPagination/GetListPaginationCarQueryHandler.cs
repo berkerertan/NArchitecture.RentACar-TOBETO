@@ -5,6 +5,7 @@ using AutoMapper;
 using Core.Persistence.Paging;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Cars.Queries.GetListPagimation;
 
@@ -22,7 +23,7 @@ public class GetListPaginationCarQueryHandler : IRequestHandler<GetListPaginatio
     public async Task<CarListModel> Handle(GetListPaginationCarQuery request, CancellationToken cancellationToken)
     {
         IPaginate<Car> cars = await _carRepository.GetListPaginateAsync
-            (index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+             (index: request.PageRequest.Page, size: request.PageRequest.PageSize, include: x => x.Include(x => x.Model).Include(x => x.Model.Brand));
         CarListModel carListModel = _mapper.Map<CarListModel>(cars);
         return carListModel;
     }

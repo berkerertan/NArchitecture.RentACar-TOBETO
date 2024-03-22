@@ -30,6 +30,7 @@ namespace Application.Features.Cars.Profiles
             CreateMap<Car, UpdateCarCommand>().ReverseMap();
             CreateMap<Car,GetByIdCarResponse>().ReverseMap();
             CreateMap<Car, UpdatedCarResponse>().ReverseMap();
+            CreateMap<Car, GetListCarResponse>().ForMember(destinationMember: x => x.BrandName, memberOptions: opt => opt.MapFrom(x => x.Model.Brand.Name));
             CreateMap<IPaginate<Car>, CarListModel>().ReverseMap();
 
         }

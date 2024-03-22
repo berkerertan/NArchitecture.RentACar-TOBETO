@@ -3,6 +3,7 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace Application.Features.Cars.Queries.GetList
 
             public async Task<List<GetByIdCarResponse>> Handle(GetListCarQuery request, CancellationToken cancellationToken)
             {
-                List<Car> cars = await _carRepository.GetAllAsync();
+                List<Car> cars = await _carRepository.GetAllAsync(include: x => x.Include(x => x.Model).Include(x => x.Model.Brand));
                 var mappedCarListModel = _mapper.Map<List<GetByIdCarResponse>>(cars);
                 return mappedCarListModel;
             }
