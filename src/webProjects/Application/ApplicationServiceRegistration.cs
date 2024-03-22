@@ -1,4 +1,7 @@
-﻿using Application.Services.CarImageService;
+﻿using Application.Services.AuthServices.AuthService;
+using Application.Services.AuthServices.UserService;
+using Application.Services.CarImageService;
+using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Performance;
@@ -6,6 +9,7 @@ using Core.Application.Pipelines.Validation;
 using Core.Application.Rules;
 using Core.CrossCutting.Logging.Serilog.Loggers;
 using Core.CrossCuttingConcerns.Logging.Serilog;
+using Core.Security.JWT;
 using FluentValidation;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -26,9 +30,13 @@ namespace Application
 
             services.AddSingleton<LoggerServiceBase, MongoDbLogger>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddSingleton<TokenOptions>();
 
-            //services.AddScoped<ICarImageService, CarImageManager>;
-
+            services.AddScoped<CarImageBusinessRules>();
+            services.AddScoped<ICarImageService, CarImageManager>();
+            services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IAuthService, AuthManager>();
+            
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
@@ -36,6 +44,7 @@ namespace Application
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CachingBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CacheRemovingBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(AuthorizationBehavior<,>));
             return services;
         }
         public static IServiceCollection AddSubClassesOfType(
