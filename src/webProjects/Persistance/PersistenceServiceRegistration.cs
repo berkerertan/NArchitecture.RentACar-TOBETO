@@ -19,8 +19,14 @@ namespace Persistence
             services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("TobetoNet3ANArchDb")));
 
             services.AddScoped<IBrandRepository, BrandRepository>();
-            services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<IModelRepository, ModelRepository>();
+            services.AddScoped<ICarRepository, CarRepository>();
+            services.AddScoped<ICarImageRepository, CarImageRepository>();
+
+            services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
+            services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 
             return services;
 
