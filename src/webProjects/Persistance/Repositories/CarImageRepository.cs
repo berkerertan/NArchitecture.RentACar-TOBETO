@@ -5,7 +5,7 @@ using Persistence.Context;
 
 namespace Persistence.Repositories;
 
-public class CarImageRepository : EfRepositoryBase<Brand, Guid, BaseDbContext>, ICarImageRepository
+public class CarImageRepository : EfRepositoryBase<CarImage, Guid, BaseDbContext>, ICarImageRepository
 {
     public CarImageRepository(BaseDbContext context) : base(context)
     {
