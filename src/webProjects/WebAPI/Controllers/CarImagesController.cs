@@ -30,11 +30,11 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
 
-        public Task<IActionResult> Add(IFormFile file, [FromForm] CarImage carImage)
+        [HttpPost]
+        public async Task<IActionResult> Add(IFormFile file, [FromForm] CarImageRequest carImage)
         {
-            var result = await _carImageService.Add(file,carImage);
+            var result = await _carImageService.Add(file, carImage);
             return Ok(result);
         }
 
@@ -42,8 +42,9 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var carImage = await _carImageService.Get(id);
-            var result = await _carImageService.Delete(id);
+            var result = await _carImageService.Delete(carImage);
             return Ok(result);
+
         }
 
         [HttpPut("{id}")]
